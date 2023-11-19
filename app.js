@@ -1,6 +1,7 @@
 const express = require("express");
 const { sequelize } = require("./models");
 const allRoutes = require("./routes");
+const errorHandler = require("./middleware/errorHandler");
 const port = process.env.PORT || 3000;
 
 const app = express();
@@ -11,6 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 
 // routers
 app.use("/api", allRoutes);
+
+app.use(errorHandler);
 
 // server
 app.listen(port, async () => {

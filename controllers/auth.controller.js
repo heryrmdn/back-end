@@ -1,5 +1,6 @@
 const bcrypt = require("bcrypt");
 const { User } = require("../models");
+const { tryCatch } = require("../utils/tryCatch");
 
 module.exports = {
   register: async (req, res) => {
@@ -7,18 +8,12 @@ module.exports = {
     const saltRounds = 10;
 
     payload.password = bcrypt.hashSync(payload.password, saltRounds);
+    await User.create(payload);
 
-    try {
-      await User.create(payload);
-
-      res.status(201).json({
-        status: true,
-        message: "Register succesfull",
-      });
-    } catch (err) {
-      res.json({
-        message: err.message,
-      });
-    }
+    res.status(201).json({
+      status: "success",
+      code: 201,
+      message: "Registration succesfull",
+    });
   },
 };
