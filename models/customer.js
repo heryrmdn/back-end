@@ -16,8 +16,10 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      phone_number: DataTypes.BIGINT,
-      gender: DataTypes.ENUM("Laki-laki", "Perempuan"),
+      phone_number: DataTypes.STRING,
+      sex: DataTypes.ENUM({
+        values: ["Laki-laki", "Perempuan"],
+      }),
     },
     {
       sequelize,

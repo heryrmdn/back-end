@@ -22,20 +22,20 @@ module.exports = {
       hospital_id: {
         type: Sequelize.STRING,
         references: {
-          model: "hospital",
+          model: "Hospital",
           key: "id",
         },
       },
       specialist_id: {
         type: Sequelize.STRING,
         references: {
-          model: "specialist",
+          model: "Specialist",
           key: "id",
         },
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Doctors");
+    await queryInterface.dropTable("Doctor");
   },
 };

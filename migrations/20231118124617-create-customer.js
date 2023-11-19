@@ -23,16 +23,15 @@ module.exports = {
         allowNull: false,
       },
       phone_number: {
-        type: Sequelize.BIGINT,
+        type: Sequelize.STRING,
       },
-      gender: {
+      sex: {
         type: Sequelize.ENUM,
         values: ["Laki-laki", "Perempuan"],
-        allowNull: false,
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Customers");
+    await queryInterface.dropTable("Customer");
   },
 };

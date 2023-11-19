@@ -11,9 +11,17 @@ module.exports = {
       },
       customer_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: "Customer",
+          key: "id",
+        },
       },
       doctor_id: {
         type: Sequelize.INTEGER,
+        references: {
+          model: "Doctor",
+          key: "id",
+        },
       },
       date: {
         type: Sequelize.DATEONLY,
@@ -23,10 +31,14 @@ module.exports = {
       },
       package_id: {
         type: Sequelize.STRING,
+        references: {
+          model: "Package",
+          key: "id",
+        },
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Books");
+    await queryInterface.dropTable("Book");
   },
 };
