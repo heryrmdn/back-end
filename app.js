@@ -12,7 +12,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // routers
 app.use("/api", allRoutes);
-
 app.use(errorHandler);
 
 // server
