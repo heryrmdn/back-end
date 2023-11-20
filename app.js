@@ -15,6 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 // routers
 app.use("/api", allRoutes);
 app.all("*", (req, res, next) => handleErrors(`Can't find ${req.originalUrl} on the server!`, 404, next));
+
+// global error handler
 app.use(errorHandler);
 
 // server
