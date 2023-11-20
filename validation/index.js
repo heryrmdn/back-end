@@ -1,13 +1,10 @@
 const { validationResult } = require("express-validator");
+const { handleErrors } = require("../utils");
 
 exports.runValidation = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const err = new Error(errors.array()[0].msg);
-    err.status = "error";
-    err.statusCode = 404;
-
-    next(err);
+    handleErrors(errors.array()[0].msg, 404, next);
   }
   next();
 };
