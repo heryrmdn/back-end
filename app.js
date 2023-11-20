@@ -2,7 +2,7 @@ const express = require("express");
 const { sequelize } = require("./models");
 const allRoutes = require("./routes");
 const errorHandler = require("./middleware/error.handler");
-const routeHandler = require("./middleware/route.handler");
+const { handleErrors } = require("./utils");
 
 const port = process.env.PORT || 3000;
 
@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // routers
 app.use("/api", allRoutes);
-app.all("*", routeHandler);
+app.all("*", (req, res, next) => handleErrors(`Can't find ${req.originalUrl} on the server!`, 404, next));
 app.use(errorHandler);
 
 // server

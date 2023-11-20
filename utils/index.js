@@ -6,3 +6,10 @@ exports.tryCatch = (controller) => async (req, res, next) => {
     return next(err);
   }
 };
+
+exports.handleErrors = (message, statusCode, next) => {
+  const err = new Error(message);
+  err.status = "error";
+  err.statusCode = statusCode;
+  next(err);
+};

@@ -2,17 +2,14 @@ require("dotenv").config();
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { handleErrors } = require("../utils");
 
 exports.register = async (req, res, next) => {
   const { name, email, password } = req.body;
 
-  const emailUser = await User.findOne({ where: { email: email } });
-  if (emailUser) {
-    const err = new Error("Email has already registered");
-    err.status = "error";
-    err.statusCode = 404;
-
-    next(err);
+  const existingUser = await User.findOne({ where: { email: email } });
+  if (existingUser) {
+    handleErrors("Email has already registered", 404, next);
   }
 
   const saltRounds = 10;
@@ -32,20 +29,12 @@ exports.login = async (req, res, next) => {
 
   const dataUser = await User.findOne({ where: { email: email } });
   if (!dataUser) {
-    const err = new Error("Email has not yet registered");
-    err.status = "error";
-    err.statusCode = 404;
-
-    next(err);
+    handleErrors("Email has not yet registered", 404, next);
   }
 
   const passwordUser = bcrypt.compareSync(password, dataUser.password);
   if (!passwordUser) {
-    const err = new Error("Password does not match");
-    err.status = "error";
-    err.statusCode = 404;
-
-    next(err);
+    handleErrors("Password does not match", 404, next);
   }
 
   if (dataUser && passwordUser) {
