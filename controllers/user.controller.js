@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { handleErrors } = require("../utils");
 
-exports.register = async (req, res, next) => {
+exports.registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
 
   const existingUser = await User.findOne({ where: { email: email } });
@@ -24,7 +24,7 @@ exports.register = async (req, res, next) => {
   });
 };
 
-exports.login = async (req, res, next) => {
+exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   const dataUser = await User.findOne({ where: { email: email } });
