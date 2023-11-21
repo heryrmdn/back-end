@@ -2,7 +2,7 @@ require("dotenv").config();
 const { Admin } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { handleErrors } = require("../utils");
+const { throwError } = require("../utils/throw-error");
 
 exports.registerAdmin = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -10,7 +10,7 @@ exports.registerAdmin = async (req, res, next) => {
   const existingAdmin = await Admin.findOne({ where: { email: email } });
 
   if (existingAdmin) {
-    handleErrors("Email has already registered", 404, next);
+    throwError("Email has already registered", 404, next);
   }
 
   const saltRounds = 10;
@@ -30,12 +30,12 @@ exports.loginAdmin = async (req, res, next) => {
 
   const dataAdmin = await Admin.findOne({ where: { email: email } });
   if (!dataAdmin) {
-    handleErrors("Email has not yet registered", 404, next);
+    throwError("Email has not yet registered", 404, next);
   }
 
   const passwordAdmin = bcrypt.compareSync(password, dataAdmin.password);
   if (!passwordAdmin) {
-    handleErrors("Password does not match", 404, next);
+    throwError("Password does not match", 404, next);
   }
 
   if (dataAdmin && passwordAdmin) {

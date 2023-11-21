@@ -2,14 +2,14 @@ require("dotenv").config();
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { handleErrors } = require("../utils");
+const { throwError } = require("../utils/throw-error");
 
 exports.registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
 
-  const existingUser = await User.findOne({ where: { email: email } });
-  if (existingUser) {
-    handleErrors("Email has already registered", 404, next);
+  const isExistingUser = await User.findOne({ where: { email: email } });
+  if (isExistingUser) {
+    throwError("Email has already registered", 404, next);
   }
 
   const saltRounds = 10;
@@ -27,25 +27,47 @@ exports.registerUser = async (req, res, next) => {
 exports.loginUser = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const dataUser = await User.findOne({ where: { email: email } });
-  if (!dataUser) {
-    handleErrors("Email has not yet registered", 404, next);
+  const user = await User.findOne({ where: { email: email } });
+  if (!user) {
+    throwError("Email has not yet registered", 404, next);
   }
 
-  const passwordUser = bcrypt.compareSync(password, dataUser.password);
-  if (!passwordUser) {
-    handleErrors("Password does not match", 404, next);
+  const isPasswordMatch = bcrypt.compareSync(password, user.password);
+  if (!isPasswordMatch) {
+    throwError("Password does not match", 404, next);
   }
 
-  if (dataUser && passwordUser) {
-    const data = { id: dataUser.id };
-    const token = jwt.sign(data, process.env.JWT_SECRET);
+  if (user && isPasswordMatch) {
+    const payload = { id: user.id, email: user.email };
+    const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+    res.cookie("access_token", token, {
+      httpOnly: true,
+    });
 
     return res.status(200).json({
       status: "success",
       code: 200,
       message: "Login successfull",
-      token,
+      data: {
+        id: user.id,
+      },
     });
   }
+};
+
+exports.logoutUser = (req, res, next) => {
+  res.clearCookie("access_token");
+
+  return res.status(200).json({
+    status: "success",
+    code: 200,
+    message: "Logout successfull",
+  });
+};
+
+exports.getUserById = (req, res, next) => {
+  console.info(req.user);
+
+  res.send(req.user);
 };

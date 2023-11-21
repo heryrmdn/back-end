@@ -1,8 +1,7 @@
 const express = require("express");
-const { runValidation } = require("../validation");
-const { validationRegister, validationLogin } = require("../validation/auth.validation");
-const { tryCatch } = require("../utils");
+const { runValidation, validationRegister, validationLogin } = require("../validation");
 const { registerAdmin, loginAdmin } = require("../controllers/admin.controller");
+const { tryCatch } = require("../utils/try-catch");
 const router = express.Router();
 
 router.post("/register", validationRegister, runValidation, tryCatch(registerAdmin));
