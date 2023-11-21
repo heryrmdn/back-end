@@ -1,6 +1,6 @@
 // error handler
 const errorHandler = (err, req, res, next) => {
-  // console.info(err);
+  console.info(err);
 
   err.status = err.status || "error";
   err.statusCode = err.statusCode || 500;
