@@ -24,3 +24,4 @@ exports.getAllDoctor = async (req, res, next) => {
     data: doctors,
   });
 };
+
