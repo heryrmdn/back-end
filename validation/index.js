@@ -10,14 +10,21 @@ exports.runValidation = (req, res, next) => {
 };
 
 exports.validationRegister = [
-  check("name", "Name is required").notEmpty(),
-  check("email", "Email is required").notEmpty(),
-  check("email", "Email must be in email format").isEmail(),
-  check("password", "Password is required").notEmpty(),
+  check("name", "name is required").notEmpty(),
+  check("email", "email is required").notEmpty(),
+  check("email", "email must be in email format").isEmail(),
+  check("password", "password is required").notEmpty(),
 ];
 
 exports.validationLogin = [
-  check("email", "Email is required").notEmpty(),
-  check("email", "Email must be in email format").isEmail(),
-  check("password", "Password is required").notEmpty(),
+  check("email", "email is required").notEmpty(),
+  check("email", "email must be in email format").isEmail(),
+  check("password", "password is required").notEmpty(),
+];
+
+exports.validationCreateBook = [
+  check("user_id", "user_id is required").notEmpty(),
+  check("doctor_id", "doctor_id is required").notEmpty(),
+  check("date", "date is required").notEmpty(),
+  check("time", "time is required").notEmpty(),
 ];

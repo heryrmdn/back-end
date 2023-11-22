@@ -4,6 +4,7 @@ const userRouter = require("./user.route");
 const adminRouter = require("./admin.route");
 const doctorRouter = require("./doctor.route");
 const articleRouter = require("./article.route");
+const bookRouter = require("./book.route");
 
 router.get("/", (req, res) => {
   res.json({
@@ -15,5 +16,6 @@ router.use("/user", userRouter);
 router.use("/admin", adminRouter);
 router.use("/doctor", doctorRouter);
 router.use("/article", articleRouter);
+router.use("/book", bookRouter);
 
 module.exports = router;
