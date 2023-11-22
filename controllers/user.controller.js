@@ -3,6 +3,7 @@ const { User } = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { throwError } = require("../utils/throw-error");
+const { Op } = require("sequelize");
 
 exports.registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -66,8 +67,21 @@ exports.logoutUser = (req, res, next) => {
   });
 };
 
-exports.getUserById = (req, res, next) => {
-  console.info(req.user);
+exports.getUserById = async (req, res, next) => {
+  const user = req.user;
+  const payload = req.params;
 
-  res.send(req.user);
+  // find one data where ID is the same as that from cookies & query parameters
+  const data = await User.findOne({
+    attributes: ["id", "name", "image", "email", "phone_number", "sex"],
+    where: {
+      [Op.and]: [{ id: user.id }, { id: payload.id }],
+    },
+  });
+
+  if (!data) {
+    return throwError("Data not found", 404, next);
+  }
+
+  return res.send(data);
 };
