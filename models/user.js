@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       image: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      phone_number: DataTypes.STRING,
+      phoneNumber: DataTypes.STRING,
       sex: DataTypes.ENUM({
         values: ["Laki-laki", "Perempuan"],
       }),

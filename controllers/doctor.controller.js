@@ -5,16 +5,8 @@ exports.getAllDoctor = async (req, res, next) => {
   const doctors = await Doctor.findAll({
     attributes: ["id", "name", "image", "rating", "name"],
     include: [
-      {
-        model: Specialist,
-        as: "specialist",
-        attributes: ["name"],
-      },
-      {
-        model: Hospital,
-        as: "hospital",
-        attributes: ["name", "city"],
-      },
+      { model: Specialist, as: "specialist", attributes: ["name"] },
+      { model: Hospital, as: "hospital", attributes: ["name", "city"] },
     ],
   });
 
@@ -32,20 +24,10 @@ exports.getDoctorById = async (req, res, next) => {
   const doctor = await Doctor.findOne({
     attributes: ["id", "name", "image", "rating", "name"],
     include: [
-      {
-        model: Specialist,
-        as: "specialist",
-        attributes: ["name"],
-      },
-      {
-        model: Hospital,
-        as: "hospital",
-        attributes: ["name", "city"],
-      },
+      { model: Specialist, as: "specialist", attributes: ["name"] },
+      { model: Hospital, as: "hospital", attributes: ["name", "city"] },
     ],
-    where: {
-      id: payload.id,
-    },
+    where: { id: payload.id },
   });
 
   if (!doctor) {
