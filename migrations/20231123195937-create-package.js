@@ -18,9 +18,12 @@ module.exports = {
       price: {
         type: Sequelize.BIGINT,
         allowNull: false,
+        defaultValue: 0,
       },
       duration: {
         type: Sequelize.TIME,
+        allowNull: false,
+        defaultValue: "00:30:00",
       },
     });
   },

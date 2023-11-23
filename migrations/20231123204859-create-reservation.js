@@ -2,17 +2,17 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Book", {
+    await queryInterface.createTable("Reservation", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      userId: {
+      customerId: {
         type: Sequelize.INTEGER,
         references: {
-          model: "User",
+          model: "Customer",
           key: "id",
         },
       },
@@ -36,19 +36,23 @@ module.exports = {
           key: "id",
         },
       },
+      status: {
+        type: Sequelize.ENUM,
+        values: ["Pending", "Approved", "Rejected"],
+        allowNull: false,
+        defaultValue: "Pending",
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW,
       },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Book");
+    await queryInterface.dropTable("Reservation");
   },
 };

@@ -18,20 +18,21 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
+        allowNull: false,
         unique: true,
       },
       password: {
         type: Sequelize.STRING,
+        allowNull: false,
       },
       rating: {
         type: Sequelize.INTEGER,
       },
-      hospitalId: {
+      hospital: {
         type: Sequelize.STRING,
-        references: {
-          model: "Hospital",
-          key: "id",
-        },
+      },
+      biography: {
+        type: Sequelize.STRING,
       },
       specialistId: {
         type: Sequelize.STRING,

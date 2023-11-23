@@ -9,20 +9,21 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Package.hasMany(models.Reservation, {
+        foreignKey: "packageId",
+      });
     }
   }
   Package.init(
     {
       name: DataTypes.STRING,
-      description: DataTypes.STRING,
+      description: DataTypes.TEXT,
       price: DataTypes.BIGINT,
       duration: DataTypes.TIME,
     },
     {
       sequelize,
       modelName: "Package",
-      freezeTableName: true,
-      timestamps: false,
     }
   );
   return Package;

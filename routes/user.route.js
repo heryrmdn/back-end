@@ -1,15 +1,13 @@
 const express = require("express");
-const { runValidation, validationRegister, validationLogin } = require("../validation/index.js");
-const { registerUser, getUserById, } = require("../controllers/user.controller.js");
+const { runValidation, validationRegister, validationLogin, validationGetUserById } = require("../validation/index.js");
+const { loginUser, logoutUser, registerUser, getUserById } = require("../controllers/user.controller.js");
 const { tryCatch } = require("../utils/try-catch.js");
-const { checkAuth } = require("../middleware/check-auth.js");
-const { checkRole } = require("../middleware/check-user.js");
-const { login, logout } = require("../controllers/auth.controller.js");
+const { checkToken } = require("../middleware/check-token.js");
 const router = express.Router();
 
+router.post("/login", validationLogin, runValidation, tryCatch(loginUser));
+router.get("/logout", tryCatch(logoutUser));
 router.post("/register", validationRegister, runValidation, tryCatch(registerUser));
-router.post("/login", validationLogin, runValidation, tryCatch(login));
-router.get("/logout", tryCatch(logout));
-router.get("/:id", checkAuth, checkRole, tryCatch(getUserById));
+router.get("/:id", checkToken, validationGetUserById, runValidation, tryCatch(getUserById));
 
 module.exports = router;

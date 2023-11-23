@@ -8,13 +8,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Doctor.belongsTo(models.Hospital, {
-        foreignKey: "hospitalId",
-        as: "hospital",
-      });
+      // define association here
       Doctor.belongsTo(models.Specialist, {
         foreignKey: "specialistId",
-        as: "specialist",
+      });
+      Doctor.hasMany(models.Reservation, {
+        foreignKey: "doctorId",
       });
     }
   }
@@ -25,14 +24,13 @@ module.exports = (sequelize, DataTypes) => {
       email: DataTypes.STRING,
       password: DataTypes.STRING,
       rating: DataTypes.INTEGER,
-      hospitalId: DataTypes.STRING,
+      hospital: DataTypes.STRING,
+      biography: DataTypes.STRING,
       specialistId: DataTypes.STRING,
     },
     {
       sequelize,
       modelName: "Doctor",
-      freezeTableName: true,
-      timestamps: false,
     }
   );
   return Doctor;

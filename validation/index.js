@@ -1,4 +1,4 @@
-const { validationResult, check } = require("express-validator");
+const { validationResult, check, query } = require("express-validator");
 const { throwError } = require("../utils/throw-error");
 
 exports.runValidation = (req, res, next) => {
@@ -28,3 +28,5 @@ exports.validationCreateBook = [
   check("date", "date is required").notEmpty(),
   check("time", "time is required").notEmpty(),
 ];
+
+exports.validationGetUserById = [check("role", "role is required. Must be either 'user' or 'admin'").notEmpty()];

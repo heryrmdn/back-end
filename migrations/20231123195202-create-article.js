@@ -11,21 +11,23 @@ module.exports = {
       },
       title: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       image: {
         type: Sequelize.STRING,
       },
-      content: {
+      description: {
         type: Sequelize.TEXT,
-        allowNull: false,
       },
       category: {
         type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATEONLY,
+        type: Sequelize.DATE,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
       },
     });
   },
