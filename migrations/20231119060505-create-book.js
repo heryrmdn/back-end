@@ -9,14 +9,14 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      user_id: {
+      userId: {
         type: Sequelize.INTEGER,
         references: {
           model: "User",
           key: "id",
         },
       },
-      doctor_id: {
+      doctorId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Doctor",
@@ -29,7 +29,7 @@ module.exports = {
       time: {
         type: Sequelize.TIME,
       },
-      package_id: {
+      packageId: {
         type: Sequelize.STRING,
         references: {
           model: "Package",

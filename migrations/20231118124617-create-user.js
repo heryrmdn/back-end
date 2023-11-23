@@ -25,12 +25,20 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      phone_number: {
+      phoneNumber: {
         type: Sequelize.STRING,
       },
       sex: {
         type: Sequelize.ENUM,
         values: ["Laki-laki", "Perempuan"],
+      },
+      roleId: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        references: {
+          model: "Role",
+          key: "id",
+        },
       },
     });
   },

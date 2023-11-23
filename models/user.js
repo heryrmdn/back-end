@@ -8,7 +8,10 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.belongsTo(models.Role, {
+        foreignKey: "roleId",
+        as: "role",
+      });
     }
   }
   User.init(
@@ -21,6 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       sex: DataTypes.ENUM({
         values: ["Laki-laki", "Perempuan"],
       }),
+      roleId: DataTypes.STRING,
     },
     {
       sequelize,

@@ -13,11 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   Book.init(
     {
-      user_id: DataTypes.INTEGER,
-      doctor_id: DataTypes.INTEGER,
+      userId: DataTypes.INTEGER,
+      doctorId: DataTypes.INTEGER,
       date: DataTypes.DATEONLY,
       time: DataTypes.TIME,
-      package_id: DataTypes.STRING,
+      packageId: DataTypes.STRING,
     },
     {
       sequelize,

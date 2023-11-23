@@ -26,14 +26,14 @@ module.exports = {
       rating: {
         type: Sequelize.INTEGER,
       },
-      hospital_id: {
+      hospitalId: {
         type: Sequelize.STRING,
         references: {
           model: "Hospital",
           key: "id",
         },
       },
-      specialist_id: {
+      specialistId: {
         type: Sequelize.STRING,
         references: {
           model: "Specialist",

@@ -9,11 +9,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       Doctor.belongsTo(models.Hospital, {
-        foreignKey: "hospital_id",
+        foreignKey: "hospitalId",
         as: "hospital",
       });
       Doctor.belongsTo(models.Specialist, {
-        foreignKey: "specialist_id",
+        foreignKey: "specialistId",
         as: "specialist",
       });
     }
