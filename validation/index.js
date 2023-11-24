@@ -21,12 +21,3 @@ exports.validationLogin = [
   check("email", "email must be in email format").isEmail(),
   check("password", "password is required").notEmpty(),
 ];
-
-exports.validationCreateBook = [
-  check("user_id", "user_id is required").notEmpty(),
-  check("doctor_id", "doctor_id is required").notEmpty(),
-  check("date", "date is required").notEmpty(),
-  check("time", "time is required").notEmpty(),
-];
-
-exports.validationGetUserById = [check("role", "role is required. Must be either 'user' or 'admin'").notEmpty()];

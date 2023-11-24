@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Doctor.belongsTo(models.Specialist, {
         foreignKey: "specialistId",
+        as: "specialist",
       });
       Doctor.hasMany(models.Reservation, {
         foreignKey: "doctorId",
@@ -31,6 +32,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "Doctor",
+      freezeTableName: true,
+      timestamps: false,
     }
   );
   return Doctor;

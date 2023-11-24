@@ -5,8 +5,6 @@ const routes = require("./routes");
 const errorHandler = require("./middleware/error-handler");
 const cookieParser = require("cookie-parser");
 
-const port = process.env.PORT || 3000;
-
 const app = express();
 
 // middleware
@@ -21,7 +19,9 @@ app.all("*", (req, res, next) => throwError(`Can't find ${req.originalUrl} on th
 // global error handler
 app.use(errorHandler);
 
-// start server & connect to db
+// server 
+const port = process.env.PORT || 3000;
+
 app.listen(port, async () => {
   try {
     await sequelize.authenticate();
