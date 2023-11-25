@@ -1,22 +1,27 @@
 const { Op } = require("sequelize");
-const { Reservation, Doctor, Specialist, Package } = require("../../models");
+const { Reservation, Doctor, Specialist, Package, Sequelize } = require("../../models");
 const { throwError } = require("../../utils/throw-error");
 
 exports.createReservation = async (req, res, next) => {
   const userId = req.user.userId;
   const body = req.body;
-  body.customerId = userId;
 
   const isExistingReservation = await Reservation.findOne({
     where: {
-      [Op.and]: [{ customerId: userId }, { doctorId: body.doctorId }, { status: "Pending" }],
+      [Op.and]: [{ doctorId: body.doctorId }, { date: body.date }, { time: body.time }, { status: "Pending" }],
     },
   });
 
   if (isExistingReservation) {
     throwError("Reservation rejected, this reservation has been made with pending status", 404, next);
   } else {
-    const reservation = await Reservation.create(body);
+    const reservation = await Reservation.create({
+      customerId: userId,
+      doctorId: body.doctorId,
+      date: body.date,
+      time: body.time,
+      packageId: body.packageId,
+    });
     res.status(201).json({
       status: "success",
       code: 201,
@@ -58,7 +63,7 @@ exports.getReservationDetail = async (req, res, next) => {
   const paramsId = parseInt(req.params.id);
 
   const reservation = await Reservation.findOne({
-    attributes: ["id", "date", "time", "status"],
+    attributes: ["id", "date", "time", "status", "createdAt", "updatedAt"],
     include: [
       {
         model: Doctor,

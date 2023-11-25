@@ -19,7 +19,7 @@ exports.login = async (req, res, next) => {
   if (!isValidPassword) throwError("Password doesn't match", 404, next);
 
   if (doctor && isValidPassword) {
-    const token = jwt.sign({ email: doctor.email, userId: doctor.id }, process.env.JWT_SECRET);
+    const token = jwt.sign({ email: doctor.email, doctorId: doctor.id }, process.env.JWT_SECRET);
 
     return res.status(201).json({
       status: "success",

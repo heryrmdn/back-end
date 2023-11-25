@@ -3,7 +3,7 @@ const { Reservation, Customer, Package } = require("../../models");
 const { throwError } = require("../../utils/throw-error");
 
 exports.getReservationList = async (req, res, next) => {
-  const userId = req.user.userId;
+  const doctorId = req.doctor.doctorId;
 
   const reservations = await Reservation.findAll({
     attributes: ["id", "date", "status"],
@@ -13,7 +13,7 @@ exports.getReservationList = async (req, res, next) => {
       attributes: ["name", "image"],
     },
     where: {
-      doctorId: userId,
+      doctorId: doctorId,
     },
   });
 
@@ -26,11 +26,11 @@ exports.getReservationList = async (req, res, next) => {
 };
 
 exports.getReservationDetail = async (req, res, next) => {
-  const userId = req.user.userId;
+  const doctorId = req.doctor.doctorId;
   const paramsId = parseInt(req.params.id);
 
   const reservation = await Reservation.findOne({
-    attributes: ["id", "date", "time", "status"],
+    attributes: ["id", "date", "time", "status", "createdAt", "updatedAt"],
     include: [
       {
         model: Customer,
@@ -44,7 +44,7 @@ exports.getReservationDetail = async (req, res, next) => {
       },
     ],
     where: {
-      [Op.and]: [{ doctorId: userId }, { id: paramsId }],
+      [Op.and]: [{ doctorId: doctorId }, { id: paramsId }],
     },
   });
 
@@ -61,13 +61,13 @@ exports.getReservationDetail = async (req, res, next) => {
 };
 
 exports.UpdateReservation = async (req, res, next) => {
-  const userId = req.user.userId;
+  const doctorId = req.doctor.doctorId;
   const paramsId = parseInt(req.params.id);
   const body = req.body;
 
   const isValidReservation = await Reservation.findOne({
     where: {
-      [Op.and]: [{ doctorId: userId }, { id: paramsId }],
+      [Op.and]: [{ doctorId: doctorId }, { id: paramsId }],
     },
   });
 
@@ -78,7 +78,7 @@ exports.UpdateReservation = async (req, res, next) => {
       { status: body.status },
       {
         where: {
-          [Op.and]: [{ doctorId: userId }, { id: paramsId }],
+          [Op.and]: [{ doctorId: doctorId }, { id: paramsId }],
         },
       }
     );

@@ -21,12 +21,17 @@ module.exports = {
       category: {
         type: Sequelize.STRING,
       },
+      doctorId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Doctor",
+          key: "id",
+        },
+      },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE,
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE,
       },
     });

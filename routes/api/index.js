@@ -7,7 +7,7 @@ const articleRouter = require("./article");
 const reservationRouter = require("./reservation");
 
 router.use("/auth", authRouter);
-router.use("/users", userRouter);
+router.use("/user", userRouter);
 router.use("/doctors", doctorRouter);
 router.use("/articles", articleRouter);
 router.use("/reservations", reservationRouter);
