@@ -1,8 +1,20 @@
-const { Article } = require("../../models");
+const { Article, Doctor, Specialist } = require("../../models");
 const { throwError } = require("../../utils/throw-error");
 
 exports.getArticleList = async (req, res, next) => {
-  const articles = await Article.findAll();
+  const articles = await Article.findAll({
+    attributes: ["id", "title", "image", "category", "createdAt", "updatedAt"],
+    include: {
+      model: Doctor,
+      as: "doctor",
+      attributes: ["name", "image", "hospital"],
+      include: {
+        model: Specialist,
+        as: "specialist",
+        attributes: ["name"],
+      },
+    },
+  });
 
   return res.status(200).json({
     status: "success",
@@ -16,6 +28,16 @@ exports.getArticleDetail = async (req, res, next) => {
   const paramsId = parseInt(req.params.id);
 
   const article = await Article.findOne({
+    include: {
+      model: Doctor,
+      as: "doctor",
+      attributes: ["name", "image", "hospital"],
+      include: {
+        model: Specialist,
+        as: "specialist",
+        attributes: ["name"],
+      },
+    },
     where: {
       id: paramsId,
     },
