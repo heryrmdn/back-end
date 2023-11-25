@@ -1,4 +1,7 @@
 exports.createReservation = (req, res, next) => {
+  const userId = req.user.userId;
+  console.info(userId);
+
   res.send("createReservation /api/reservations");
 };
 
