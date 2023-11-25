@@ -1,8 +1,8 @@
-const { setSession } = require("../../middleware/sessions-handler");
+require("dotenv").config;
 const { Customer } = require("../../models");
 const { throwError } = require("../../utils/throw-error");
 const bcrypt = require("bcrypt");
-const uuidv4 = require("uuid").v4;
+const jwt = require("jsonwebtoken");
 
 exports.login = async (req, res, next) => {
   const body = req.body;
@@ -20,18 +20,15 @@ exports.login = async (req, res, next) => {
   if (!isValidPassword) throwError("Password doesn't match", 404, next);
 
   if (user && isValidPassword) {
-    const sessionId = uuidv4();
-    const userSession = { email: user.email, userId: user.id };
-
-    setSession(sessionId, userSession);
-
-    res.cookie("session", sessionId);
+    const token = jwt.sign({ email: user.email, userId: user.id }, process.env.JWT_SECRET);
 
     return res.status(201).json({
       status: "success",
-      code: 201,
+      code: 200,
       message: "Login successfull",
-      userId: userSession.userId,
+      data: {
+        access_token: token,
+      },
     });
   }
 };
