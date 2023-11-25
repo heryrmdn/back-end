@@ -1,7 +1,7 @@
 require("dotenv").config;
 const { Customer } = require("../../models");
 const { throwError } = require("../../utils/throw-error");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 exports.login = async (req, res, next) => {
