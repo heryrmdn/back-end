@@ -19,7 +19,7 @@ app.all("*", (req, res, next) => throwError(`Can't find ${req.originalUrl} on th
 // global error handler
 app.use(errorHandler);
 
-// server 
+// server
 const port = process.env.PORT || 3000;
 
 app.listen(port, async () => {
