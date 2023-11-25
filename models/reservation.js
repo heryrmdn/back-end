@@ -11,12 +11,15 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Reservation.belongsTo(models.Customer, {
         foreignKey: "customerId",
+        as: "customer",
       });
       Reservation.belongsTo(models.Doctor, {
         foreignKey: "doctorId",
+        as: "doctor",
       });
       Reservation.belongsTo(models.Package, {
         foreignKey: "packageId",
+        as: "package",
       });
     }
   }
@@ -30,6 +33,14 @@ module.exports = (sequelize, DataTypes) => {
       status: {
         type: DataTypes.ENUM,
         values: ["Pending", "Approved", "Rejected"],
+      },
+      createdAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
+      },
+      updatedAt: {
+        type: DataTypes.DATE,
+        allowNull: true,
       },
     },
     {

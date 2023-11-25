@@ -1,7 +1,6 @@
 const { Op } = require("sequelize");
 const { Customer } = require("../../models");
 const { throwError } = require("../../utils/throw-error");
-const { use } = require("../../routes/api/user");
 
 exports.getUserDetail = async (req, res, next) => {
   const userId = req.user.userId;

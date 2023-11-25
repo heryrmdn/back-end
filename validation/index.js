@@ -21,3 +21,10 @@ exports.validationLogin = [
   check("email", "email must be in email format").isEmail(),
   check("password", "password is required").notEmpty(),
 ];
+
+exports.validationCreateReservation = [
+  check("doctorId", "doctorId is required").notEmpty(),
+  check("date", "date is required").notEmpty(),
+  check("time", "time is required").notEmpty(),
+  check("packageId", "packageId is required").notEmpty(),
+];
