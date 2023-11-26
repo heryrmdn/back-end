@@ -1,8 +1,10 @@
 const express = require("express");
+const path = require("path");
 const { sequelize } = require("./models");
 const allRoutes = require("./routes");
 const notFound = require("./middleware/not-found-middleware");
 const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
 const errorHandler = require("./middleware/error-handler-middleware");
 
 const app = express();
@@ -11,6 +13,8 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname)));
 
 // routers
 app.use(allRoutes);

@@ -1,4 +1,5 @@
 const { Customer } = require("../../models");
+const { throwError } = require("../../utils/throw-error");
 
 exports.getUserDetail = async (req, res, next) => {
   const userId = req.user.userId;
@@ -42,16 +43,31 @@ exports.updateUser = async (req, res, next) => {
   });
 };
 
-// exports.updateUserPhoto = async (req, res, next) => {
-//   const paramsId = parseInt(req.params.id);
+exports.updateUserPhoto = async (req, res, next) => {
+  const userId = req.user.userId;
+  const file = req.file;
 
-//   const file = req.file;
-//   const fileName = file.fileName;
-//   const pathFile = `${req.protocol}://${req.get("host")}/public/uploads/${fileName}`;
+  if (!file) {
+    throwError("Image is required", 404, next);
+  } else {
+    const fileName = file.filename.split(" ").join("-");
+    let finalImageURL = req.protocol + "://" + req.get("host") + "/public/uploads/" + fileName;
 
-//   await Customer.update({
-//     image: pathFile,
-//   });
+    await Customer.update(
+      {
+        image: finalImageURL,
+      },
+      {
+        where: {
+          id: userId,
+        },
+      }
+    );
 
-//   res.send(`updateUser /api/users/${paramsId}`);
-// };
+    res.status(201).json({
+      status: "success",
+      code: 201,
+      message: "Success update user photo",
+    });
+  }
+};
