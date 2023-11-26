@@ -62,8 +62,8 @@ exports.getArticleDetail = async (req, res, next) => {
   }
 };
 
-exports.createArticle = (req, res, next) => {
-  res.send("createArticle /dashboard-api/articles");
+exports.createArticle = async (req, res, next) => {
+  res.send("OK!");
 };
 
 exports.updateArticle = (req, res, next) => {
