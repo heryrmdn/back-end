@@ -1,4 +1,5 @@
 const { Doctor, Specialist } = require("../../models");
+const { throwError } = require("../../utils/throw-error");
 
 exports.getUserDetail = async (req, res, next) => {
   const doctorId = req.doctor.doctorId;
@@ -45,4 +46,31 @@ exports.updateUser = async (req, res, next) => {
     message: "Success update user",
   });
 };
-// exports.updateUserPhoto = (req, res, next) => {};
+exports.updateUserPhoto = async (req, res, next) => {
+  const doctorId = req.doctor.doctorId;
+  const file = req.file;
+
+  if (!file) {
+    throwError("Image is required", 404, next);
+  } else {
+    const fileName = file.filename.split(" ").join("-");
+    let finalImageURL = req.protocol + "://" + req.get("host") + "/public/uploads/" + fileName;
+
+    await Doctor.update(
+      {
+        image: finalImageURL,
+      },
+      {
+        where: {
+          id: doctorId,
+        },
+      }
+    );
+
+    res.status(201).json({
+      status: "success",
+      code: 201,
+      message: "Success update user photo",
+    });
+  }
+};
