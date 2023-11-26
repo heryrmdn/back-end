@@ -115,6 +115,42 @@ exports.updateArticle = async (req, res, next) => {
   }
 };
 
+exports.updateArticlePhoto = async (req, res, next) => {
+  const doctorId = req.doctor.doctorId;
+  const paramsId = parseInt(req.params.id);
+  const file = req.file;
+
+  if (!file) return throwError("Image is required", 404, next);
+
+  const article = await Article.findOne({
+    where: {
+      [Op.and]: [{ id: paramsId }, { doctorId: doctorId }],
+    },
+  });
+
+  if (!article) return throwError("Data not found", 404, next);
+
+  const fileName = file.filename.split(" ").join("-");
+  let finalImageURL = req.protocol + "://" + req.get("host") + "/public/uploads/" + fileName;
+
+  await Article.update(
+    {
+      image: finalImageURL,
+    },
+    {
+      where: {
+        [Op.and]: [{ doctorId: doctorId }, {}],
+      },
+    }
+  );
+
+  return res.status(201).json({
+    status: "success",
+    code: 201,
+    message: "Success update article photo",
+  });
+};
+
 exports.deleteArticle = async (req, res, next) => {
   const paramsId = parseInt(req.params.id);
   const doctorId = req.doctor.doctorId;
