@@ -10,7 +10,6 @@ module.exports = {
           title: "Understanding the Mind-Body Connection",
           image: "https://loremflickr.com/640/480/people",
           category: "Psychiatry",
-          doctorId: "173",
           createdAt: "2022-12-01",
           description: `
       Exploring the intricate relationship between the mind and the body has been a focal point in psychiatry. Recent studies delve into the ways psychological well-being influences physical health and vice versa.
@@ -22,7 +21,6 @@ module.exports = {
           title: "The Impact of Positive Psychology on Mental Health",
           image: "https://loremflickr.com/640/480/people",
           category: "Psychology",
-          doctorId: "173",
           createdAt: "2022-12-02",
           description: `
       Positive psychology, with its emphasis on strengths and positive emotions, has shown a profound impact on mental health. Research indicates that cultivating positivity, gratitude, and engagement contributes to improved well-being and resilience.
@@ -34,7 +32,6 @@ module.exports = {
           title: "Nutritional Strategies for Optimal Mental Health",
           image: "https://loremflickr.com/640/480/people",
           category: "General Heal",
-          doctorId: "173",
           createdAt: "2022-12-03",
           description: `
       The connection between nutrition and mental health is gaining attention in the realm of general health. Scientific studies explore the impact of diet on mood, cognition, and overall mental well-being.
@@ -46,7 +43,6 @@ module.exports = {
           title: "Advancements in Cognitive Behavioral Therapy",
           image: "https://loremflickr.com/640/480/people",
           category: "Psychiatry",
-          doctorId: "170",
           createdAt: "2022-12-04",
           description: `
       Cognitive Behavioral Therapy (CBT) continues to evolve with groundbreaking advancements in psychiatry. The therapy, known for its effectiveness in treating various mental health conditions, adapts to incorporate new techniques and approaches.
@@ -58,7 +54,6 @@ module.exports = {
           title: "Exploring the Psychology of Resilience",
           image: "https://loremflickr.com/640/480/people",
           category: "Psychology",
-          doctorId: "170",
           createdAt: "2022-12-05",
           description: `
       Resilience, a psychological trait associated with the ability to bounce back from adversity, is a subject of extensive research in psychology. Studies delve into the factors that contribute to resilience and ways to cultivate this vital quality.
@@ -70,7 +65,6 @@ module.exports = {
           title: "The Role of Sleep in Mental and Physical Health",
           image: "https://loremflickr.com/640/480/people",
           category: "General Heal",
-          doctorId: "170",
           createdAt: "2022-12-06",
           description: `
       Sleep plays a crucial role in both mental and physical health. Ongoing research explores the intricate connections between quality sleep and cognitive function, emotional well-being, and overall physical health.
@@ -82,7 +76,6 @@ module.exports = {
           title: "Innovations in Telepsychiatry Services",
           image: "https://loremflickr.com/640/480/people",
           category: "Psychiatry",
-          doctorId: "171",
           createdAt: "2022-12-07",
           description: `
       Telepsychiatry, the provision of mental health services through remote technology, is undergoing transformative innovations. Advancements in digital platforms, virtual therapy sessions, and online mental health resources are reshaping the landscape of psychiatric care.
@@ -94,7 +87,6 @@ module.exports = {
           title: "The Psychology of Mindfulness Meditation",
           image: "https://loremflickr.com/640/480/people",
           category: "Psychology",
-          doctorId: "171",
           createdAt: "2022-12-08",
           description: `
       Mindfulness meditation, rooted in ancient practices, has become a focal point in modern psychology. Researchers explore the psychological benefits of mindfulness, including stress reduction, improved focus, and enhanced emotional well-being.
@@ -106,7 +98,6 @@ module.exports = {
           title: "Holistic Approaches to Mental Health Care",
           image: "https://loremflickr.com/640/480/people",
           category: "General Heal",
-          doctorId: "171",
           createdAt: "2022-12-09",
           description: `
       Holistic approaches to mental health care encompass a comprehensive view of an individual's well-being, considering physical, psychological, and social aspects. Integrative practices, such as combining traditional and alternative therapies, aim to provide holistic support.
@@ -118,7 +109,6 @@ module.exports = {
           title: "Psychiatric Considerations in the Era of Remote Work",
           image: "https://loremflickr.com/640/480/people",
           category: "Psychiatry",
-          doctorId: "172",
           createdAt: "2022-12-10",
           description: `
       The shift to remote work has prompted a closer examination of psychiatric considerations in the digital era. Psychiatrists explore the mental health challenges associated with remote work, including isolation, burnout, and stress.

@@ -63,17 +63,81 @@ exports.getArticleDetail = async (req, res, next) => {
 };
 
 exports.createArticle = async (req, res, next) => {
-  res.send("OK!");
+  const doctorId = req.doctor.doctorId;
+  const body = req.body;
+
+  await Article.create({
+    title: body.title,
+    description: body.description,
+    category: body.category,
+    doctorId: doctorId,
+  });
+
+  return res.status(201).json({
+    status: "success",
+    code: 200,
+    message: "Success create article",
+  });
 };
 
-exports.updateArticle = (req, res, next) => {
-  const params = req.params;
+exports.updateArticle = async (req, res, next) => {
+  const paramsId = parseInt(req.params.id);
+  const doctorId = req.doctor.doctorId;
+  const body = req.body;
 
-  res.send(`updateArticle /dashboard-api/articles/${params.id}`);
+  const article = await Article.findOne({
+    where: {
+      [Op.and]: [{ id: paramsId }, { doctorId: doctorId }],
+    },
+  });
+
+  if (!article) {
+    throwError("Data not found", 404, next);
+  } else {
+    await Article.update(
+      {
+        title: body.title,
+        description: body.description,
+        category: body.category,
+      },
+      {
+        where: {
+          [Op.and]: [{ id: paramsId }, { doctorId: doctorId }],
+        },
+      }
+    );
+
+    return res.status(200).json({
+      status: "success",
+      code: 200,
+      message: "Success update article",
+    });
+  }
 };
 
-exports.deleteArticle = (req, res, next) => {
-  const params = req.params;
+exports.deleteArticle = async (req, res, next) => {
+  const paramsId = parseInt(req.params.id);
+  const doctorId = req.doctor.doctorId;
 
-  res.send(`deleteArticle /dashboard-api/articles/${params.id}`);
+  const article = await Article.findOne({
+    where: {
+      [Op.and]: [{ id: paramsId }, { doctorId: doctorId }],
+    },
+  });
+
+  if (!article) {
+    throwError("Data not found", 404, next);
+  } else {
+    await Article.destroy({
+      where: {
+        [Op.and]: [{ id: paramsId }, { doctorId: doctorId }],
+      },
+    });
+
+    return res.status(200).json({
+      status: "success",
+      code: 200,
+      message: "Success delete article",
+    });
+  }
 };

@@ -38,6 +38,7 @@ exports.validationUpdateUser = [
   check("name", "name is required").notEmpty(),
   check("phoneNumber", "phoneNumber is required").notEmpty(),
   check("sex", "sex is required").notEmpty(),
+  check("sex", "sex value only has the option 'Laki-laki' / 'Perempuan'").isIn(["Laki-laki", "Perempuan"]).notEmpty(),
 ];
 
 exports.validationUpdateUserDashboard = [
@@ -47,6 +48,12 @@ exports.validationUpdateUserDashboard = [
 ];
 
 exports.validationCreateArticle = [
+  check("title", "title is required").notEmpty(),
+  check("description", "description is required").notEmpty(),
+  check("category", "category is required").notEmpty(),
+];
+
+exports.validationUpdateArticle = [
   check("title", "title is required").notEmpty(),
   check("description", "description is required").notEmpty(),
   check("category", "category is required").notEmpty(),
