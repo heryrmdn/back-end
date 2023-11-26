@@ -1,9 +1,9 @@
 const express = require("express");
 const { sequelize } = require("./models");
-const { throwError } = require("./utils/throw-error");
-const routes = require("./routes");
-const errorHandler = require("./middleware/error-handler");
+const allRoutes = require("./routes");
+const notFound = require("./middleware/not-found-middleware");
 const cookieParser = require("cookie-parser");
+const errorHandler = require("./middleware/error-handler-middleware");
 
 const app = express();
 
@@ -13,10 +13,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // routers
-app.use("/", routes);
-app.all("*", (req, res, next) => throwError(`Can't find ${req.originalUrl} on the server!`, 404, next));
+app.use(allRoutes);
 
-// global error handler
+// error handler
+app.use(notFound);
 app.use(errorHandler);
 
 // server
