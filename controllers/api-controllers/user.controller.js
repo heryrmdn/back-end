@@ -26,7 +26,7 @@ exports.updateUser = async (req, res, next) => {
   await Customer.update(
     {
       name: body.name,
-      phoneNumber: body.name,
+      phoneNumber: body.phoneNumber,
       sex: body.sex,
     },
     {
@@ -51,7 +51,7 @@ exports.updateUserPhoto = async (req, res, next) => {
     throwError("Image is required", 404, next);
   } else {
     const fileName = file.filename.split(" ").join("-");
-    let finalImageURL = req.protocol + "://" + req.get("host") + "/public/uploads/" + fileName;
+    let finalImageURL = `${req.protocol}://${req.get("host")}/public/uploads/${fileName}`;
 
     await Customer.update(
       {
@@ -68,6 +68,7 @@ exports.updateUserPhoto = async (req, res, next) => {
       status: "success",
       code: 201,
       message: "Success update user photo",
+      finalImageURL,
     });
   }
 };
