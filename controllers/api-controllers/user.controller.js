@@ -68,7 +68,6 @@ exports.updateUserPhoto = async (req, res, next) => {
       status: "success",
       code: 201,
       message: "Success update user photo",
-      finalImageURL,
     });
   }
 };

@@ -234,11 +234,11 @@
 
 ---
 
-- `GET /todos	`
+- `GET /api/doctors	`
 
-  REST API to show list of todo
+  REST API Get Doctor list
 
-  > Get All Todo
+  > Get Get Doctor list
 
   _Request Header_
 
@@ -249,40 +249,38 @@
   _Path Example_
 
   ```
-  GET https://tan-determined-pangolin.cyclic.app/todos
+  GET https://back-end-production-a31e.up.railway.app/api/doctors
   ```
 
   _Response (200)_
 
   ```json
   {
-    "status": true,
+    "status": "success",
     "code": 200,
-    "message": "success get all todo",
-    "data": [
+    "message": "Success get doctor list",
+    "doctors": [
       {
-        "id": 23,
-        "value": "Buy Milk",
-        "status": false,
-        "userId": 14,
-        "createdAt": "2023-11-13T08:07:21.000Z",
-        "updatedAt": "2023-11-13T08:07:21.000Z"
+        "id": 1,
+        "name": "dr. Luis Schroeder",
+        "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1152.jpg",
+        "rating": 5,
+        "hospital": "Fort Collins Hospital",
+        "biography": "biography 1",
+        "specialist": {
+          "name": "Psychiatrist"
+        }
       },
       {
-        "id": 26,
-        "value": "Buy Egg",
-        "status": false,
-        "userId": 14,
-        "createdAt": "2023-11-13T08:13:22.000Z",
-        "updatedAt": "2023-11-13T08:13:22.000Z"
-      },
-      {
-        "id": 27,
-        "value": "Buy Vegetables",
-        "status": false,
-        "userId": 14,
-        "createdAt": "2023-11-13T08:13:35.000Z",
-        "updatedAt": "2023-11-13T08:13:35.000Z"
+        "id": 2,
+        "name": "dr. Marian Sporer",
+        "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/811.jpg",
+        "rating": 4,
+        "hospital": "West Ahmed Hospital",
+        "biography": "biography 2",
+        "specialist": {
+          "name": "Dentist"
+        }
       }
     ]
   }
@@ -297,6 +295,172 @@
     "message": "Internal server error"
   }
   ```
+
+---
+
+- `GET /api/doctors/:id	`
+
+  REST API Get Doctor detail
+
+  > Get Get Doctor detail
+
+  _Request Header_
+
+  | Key           |        Value        |       Location |
+  | :------------ | :-----------------: | -------------: |
+  | Authorization | Bearer <your_token> | Request header |
+
+  _Path Example_
+
+  ```
+  GET https://back-end-production-a31e.up.railway.app/api/doctors/1
+  ```
+
+  _Response (200)_
+
+  ```json
+  {
+    "status": "success",
+    "code": 200,
+    "message": "Success get doctor detail",
+    "doctor": {
+      "id": 1,
+      "name": "dr. Luis Schroeder",
+      "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1152.jpg",
+      "rating": 5,
+      "hospital": "Fort Collins Hospital",
+      "biography": "biography 1",
+      "specialist": {
+        "name": "Psychiatrist"
+      }
+    }
+  }
+  ```
+
+  _Response (500 - Internal Server Error)_
+
+  ```json
+  {
+    "status": false,
+    "code": 500,
+    "message": "Internal server error"
+  }
+  ```
+
+---
+
+- `GET /api/articles/	`
+
+  REST API Get Article list
+
+  > Get Get Article list
+
+  _Request Header_
+
+  | Key           |        Value        |       Location |
+  | :------------ | :-----------------: | -------------: |
+  | Authorization | Bearer <your_token> | Request header |
+
+  _Path Example_
+
+  ```
+  GET https://back-end-production-a31e.up.railway.app/api/articles
+  ```
+
+  _Response (200)_
+
+  ```json
+  {
+    "status": "success",
+    "code": 200,
+    "message": "Success get article list",
+    "articles": [
+      {
+        "id": 1,
+        "title": "Understanding the Mind-Body Connection",
+        "image": "https://loremflickr.com/640/480/people",
+        "category": "Psychiatry",
+        "createdAt": "2022-12-01T00:00:00.000Z",
+        "updatedAt": null,
+        "doctor": null
+      },
+      {
+        "id": 2,
+        "title": "The Impact of Positive Psychology on Mental Health",
+        "image": "https://loremflickr.com/640/480/people",
+        "category": "Psychology",
+        "createdAt": "2022-12-02T00:00:00.000Z",
+        "updatedAt": null,
+        "doctor": null
+      }
+    ]
+  }
+  ```
+
+  _Response (500 - Internal Server Error)_
+
+  ```json
+  {
+    "status": false,
+    "code": 500,
+    "message": "Internal server error"
+  }
+  ```
+
+---
+
+- `GET /api/articles/:id	`
+
+  REST API Get Article detail
+
+  > Get Get Article detail
+
+  _Request Header_
+
+  | Key           |        Value        |       Location |
+  | :------------ | :-----------------: | -------------: |
+  | Authorization | Bearer <your_token> | Request header |
+
+  _Path Example_
+
+  ```
+  GET https://back-end-production-a31e.up.railway.app/api/articles/1
+  ```
+
+  _Response (200)_
+
+  ```json
+  {
+    "status": "success",
+    "code": 200,
+    "message": "Success get article detail",
+    "article": {
+      "id": 1,
+      "title": "Understanding the Mind-Body Connection",
+      "image": "https://loremflickr.com/640/480/people",
+      "description": "\n      Exploring the intricate relationship between the mind and the body has been a focal point in psychiatry. Recent studies delve into the ways psychological well-being influences physical health and vice versa.\n\n      Psychiatric experts emphasize the importance of holistic approaches that consider both mental and physical aspects of an individual's health. Understanding this mind-body connection opens new avenues for comprehensive healthcare strategies.\n    ",
+      "category": "Psychiatry",
+      "doctorId": null,
+      "createdAt": "2022-12-01T00:00:00.000Z",
+      "updatedAt": null,
+      "doctor": null
+    }
+  }
+  ```
+
+  _Response (500 - Internal Server Error)_
+
+  ```json
+  {
+    "status": false,
+    "code": 500,
+    "message": "Internal server error"
+  }
+  ```
+
+---
+
+
 
 ---
 
