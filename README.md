@@ -238,7 +238,7 @@
 
   REST API Get Doctor list
 
-  > Get Get Doctor list
+  > Get Doctor list
 
   _Request Header_
 
@@ -302,7 +302,7 @@
 
   REST API Get Doctor detail
 
-  > Get Get Doctor detail
+  > Get Doctor detail
 
   _Request Header_
 
@@ -353,7 +353,7 @@
 
   REST API Get Article list
 
-  > Get Get Article list
+  > Get Article list
 
   _Request Header_
 
@@ -413,7 +413,7 @@
 
   REST API Get Article detail
 
-  > Get Get Article detail
+  > Get Article detail
 
   _Request Header_
 
@@ -460,7 +460,120 @@
 
 ---
 
+- `POST /api/reservations	`
 
+  REST API Create reservation
+
+  > Create Reservation
+
+  _Request Header_
+
+  | Key           |        Value        |       Location |
+  | :------------ | :-----------------: | -------------: |
+  | Authorization | Bearer <your_token> | Request header |
+
+  _Request Body_
+
+  ```json
+  {
+    "doctorId": "2",
+    "date": "2023-12-11",
+    "time": "14:00:00",
+    "packageId": "P0001"
+  }
+  ```
+
+  _Path Example_
+
+  ```
+  POST https://back-end-production-a31e.up.railway.app/api/reservations
+  ```
+
+  _Response (200)_
+
+  ```json
+  {
+    "status": "success",
+    "code": 201,
+    "message": "Success create reservation",
+    "reservationId": 3
+  }
+  ```
+
+  _Response (500 - Internal Server Error)_
+
+  ```json
+  {
+    "status": false,
+    "code": 500,
+    "message": "Internal server error"
+  }
+  ```
+
+---
+
+- `GET /api/reservations	`
+
+  REST API Get Reservation list
+
+  > Get Reservation list
+
+  _Request Header_
+
+  | Key           |        Value        |       Location |
+  | :------------ | :-----------------: | -------------: |
+  | Authorization | Bearer <your_token> | Request header |
+
+  _Path Example_
+
+  ```
+  GET https://back-end-production-a31e.up.railway.app/api/reservations
+  ```
+
+  _Response (200)_
+
+  ```json
+  {
+    "status": "success",
+    "code": 200,
+    "reservations": [
+      {
+        "id": 2,
+        "date": "2023-12-11",
+        "status": "Pending",
+        "doctor": {
+          "name": "dr. Luis Schroeder",
+          "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1152.jpg",
+          "specialist": {
+            "name": "Psychiatrist"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "date": "2023-12-11",
+        "status": "Pending",
+        "doctor": {
+          "name": "dr. Marian Sporer",
+          "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/811.jpg",
+          "specialist": {
+            "name": "Dentist"
+          }
+        }
+      }
+    ]
+  }
+  ```
+
+  _Response (500 - Internal Server Error)_
+
+  ```json
+  {
+    "status": false,
+    "code": 500,
+    "message": "Internal server error"
+  }
+  ```
 
 ---
 

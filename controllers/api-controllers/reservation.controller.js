@@ -6,29 +6,38 @@ exports.createReservation = async (req, res, next) => {
   const userId = req.user.userId;
   const body = req.body;
 
-  const isExistingReservation = await Reservation.findOne({
+  const isMadeReservation = await Reservation.findOne({
     where: {
-      [Op.and]: [{ doctorId: body.doctorId }, { date: body.date }, { time: body.time }, { status: "Pending" }],
+      [Op.and]: [{ customerId: userId }, { date: body.date }, { time: body.time }],
+      [Op.or]: [{ status: "Pending" }, { status: "Approved" }],
     },
   });
 
-  if (isExistingReservation) {
-    throwError("Reservation rejected, this reservation has been made with pending status", 404, next);
-  } else {
-    const reservation = await Reservation.create({
-      customerId: userId,
-      doctorId: body.doctorId,
-      date: body.date,
-      time: body.time,
-      packageId: body.packageId,
-    });
-    res.status(201).json({
-      status: "success",
-      code: 201,
-      message: "Success create reservation",
-      reservationId: reservation.id,
-    });
-  }
+  if (isMadeReservation) return throwError("Reservation rejected, you have already made a reservation on this schedule", 400, next);
+
+  const isExistingReservation = await Reservation.findOne({
+    where: {
+      [Op.and]: [{ doctorId: body.doctorId }, { date: body.date }, { time: body.time }],
+      [Op.or]: [{ status: "Pending" }, { status: "Approved" }],
+    },
+  });
+
+  if (isExistingReservation) return throwError("Reservation rejected, this schedule has been reserved on another reservation number", 400, next);
+
+  const reservation = await Reservation.create({
+    customerId: userId,
+    doctorId: body.doctorId,
+    date: body.date,
+    time: body.time,
+    packageId: body.packageId,
+  });
+
+  return res.status(201).json({
+    status: "success",
+    code: 201,
+    message: "Success create reservation",
+    reservationId: reservation.id,
+  });
 };
 
 exports.getReservationList = async (req, res, next) => {
