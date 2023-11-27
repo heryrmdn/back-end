@@ -131,7 +131,7 @@ exports.updateArticlePhoto = async (req, res, next) => {
   if (!article) return throwError("Data not found", 404, next);
 
   const fileName = file.filename.split(" ").join("-");
-  let finalImageURL = req.protocol + "://" + req.get("host") + "/public/uploads/" + fileName;
+  let finalImageURL = `${req.protocol}://${req.get("host")}/public/uploads/${fileName}`;
 
   await Article.update(
     {

@@ -54,7 +54,7 @@ exports.updateUserPhoto = async (req, res, next) => {
     throwError("Image is required", 404, next);
   } else {
     const fileName = file.filename.split(" ").join("-");
-    let finalImageURL = req.protocol + "://" + req.get("host") + "/public/uploads/" + fileName;
+    let finalImageURL = `${req.protocol}://${req.get("host")}/public/uploads/${fileName}`;
 
     await Doctor.update(
       {

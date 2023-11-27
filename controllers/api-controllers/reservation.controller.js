@@ -63,6 +63,7 @@ exports.getReservationList = async (req, res, next) => {
   return res.status(200).json({
     status: "success",
     code: 200,
+    message: "Success Get reservation list",
     reservations,
   });
 };
@@ -101,6 +102,7 @@ exports.getReservationDetail = async (req, res, next) => {
     return res.status(200).json({
       status: "success",
       code: 200,
+      message: "Success Get reservation detail",
       reservation,
     });
   }
