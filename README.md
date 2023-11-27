@@ -240,12 +240,6 @@
 
   > Get Doctor list
 
-  _Request Header_
-
-  | Key           |        Value        |       Location |
-  | :------------ | :-----------------: | -------------: |
-  | Authorization | Bearer <your_token> | Request header |
-
   _Path Example_
 
   ```
@@ -304,12 +298,6 @@
 
   > Get Doctor detail
 
-  _Request Header_
-
-  | Key           |        Value        |       Location |
-  | :------------ | :-----------------: | -------------: |
-  | Authorization | Bearer <your_token> | Request header |
-
   _Path Example_
 
   ```
@@ -354,12 +342,6 @@
   REST API Get Article list
 
   > Get Article list
-
-  _Request Header_
-
-  | Key           |        Value        |       Location |
-  | :------------ | :-----------------: | -------------: |
-  | Authorization | Bearer <your_token> | Request header |
 
   _Path Example_
 
@@ -428,12 +410,6 @@
   REST API Get Article detail
 
   > Get Article detail
-
-  _Request Header_
-
-  | Key           |        Value        |       Location |
-  | :------------ | :-----------------: | -------------: |
-  | Authorization | Bearer <your_token> | Request header |
 
   _Path Example_
 
@@ -821,7 +797,7 @@
 
   ***
 
-  - `GET /dashboard-api/reservations/:id	`
+- `GET /dashboard-api/reservations/:id	`
 
   REST API Get Reservation detail
 
@@ -878,7 +854,7 @@
 
   ***
 
-  - `PUT /dashboard-api/reservations/:id	`
+- `PUT /dashboard-api/reservations/:id	`
 
   REST API Update Reservation
 
@@ -1000,7 +976,7 @@
 
   ***
 
-  - `GET /dashboard-api/articles/:id	`
+- `GET /dashboard-api/articles/:id	`
 
   REST API Get Article detail
 
@@ -1058,7 +1034,7 @@
 
   ***
 
-  - `POST /dashboard-api/articles	`
+- `POST /dashboard-api/articles	`
 
   REST API Create Article
 
@@ -1108,7 +1084,7 @@
 
   ***
 
-  - `PUT /dashboard-api/articles/:id	`
+- `PUT /dashboard-api/articles/:id	`
 
   REST API Update Article
 
@@ -1125,7 +1101,7 @@
   ```json
   {
     "title": "Your new title article",
-    "description": "your new description",
+    "description": "Your new description",
     "category": "Healthy lifestyle"
   }
   ```
@@ -1158,7 +1134,7 @@
 
   ***
 
-  - `PUT /dashboard-api/articles/:id	`
+- `PUT /dashboard-api/articles/:id/upload	`
 
   REST API Update Article photo
 
@@ -1179,7 +1155,7 @@
   _Path Example_
 
   ```
-  PUT https://back-end-production-a31e.up.railway.app/dashboard-api/articles/11
+  PUT https://back-end-production-a31e.up.railway.app/dashboard-api/articles/11/upload
   ```
 
   _Response (200)_
@@ -1202,115 +1178,13 @@
   }
   ```
 
----
-
----
-
----
-
----
-
-- `GET /todos/:id`
-
-  REST API to show detail todo
-
-  > Get Todo By Id
-
-  _Request Header_
-
-  | Key           |        Value        |       Location |
-  | :------------ | :-----------------: | -------------: |
-  | Authorization | Bearer <your_token> | Request header |
-
-  _Path Example_
-
-  ```
-  GET https://tan-determined-pangolin.cyclic.app/todos/23
-  ```
-
-  _Response (200)_
-
-  ```json
-  {
-    "status": true,
-    "code": 200,
-    "message": "success get todo id: 23",
-    "data": {
-      "id": 23,
-      "value": "Buy Milk",
-      "status": "error",
-      "userId": 14,
-      "createdAt": "2023-11-13T08:07:21.000Z",
-      "updatedAt": "2023-11-13T08:07:21.000Z"
-    }
-  }
-  ```
-
-  _Response (404 - Data not found)_
-
-  ```json
-  {
-    "status": "error",
-    "code": 400,
-    "message": "Data not found"
-  }
-  ```
-
   ***
 
-- `UPDATE /todos/:id`
+- `DELETE /dashboard-api/articles/:id	`
 
-  REST API to update todo
+  REST API Delete Article
 
-  > Update Todo
-
-  _Request Header_
-
-  | Key           |        Value        |       Location |
-  | :------------ | :-----------------: | -------------: |
-  | Authorization | Bearer <your_token> | Request header |
-
-  _Request Body_
-
-  ```json
-  {
-    "value": "Buy Fruits"
-  }
-  ```
-
-  _Path Example_
-
-  ```
-  PUT https://tan-determined-pangolin.cyclic.app/todos/23
-  ```
-
-  _Response (200)_
-
-  ```json
-  {
-    "status": true,
-    "code": 200,
-    "message": "Success update todo id: 23"
-  }
-  ```
-
-  _Response (400 - Bad Request)_
-
-  ```json
-  {
-    "status": "error",
-    "code": 400,
-    "message": "Invalid request"
-  }
-  ```
-
-  ***
-
-- `DELETE /todos/:id`
-
-  REST API to delete todo by id
-
-  > Delete Todo by id
+  > Delete Article
 
   _Request Header_
 
@@ -1321,56 +1195,16 @@
   _Path Example_
 
   ```
-  DELETE https://tan-determined-pangolin.cyclic.app/todos/23
+  DELETE https://back-end-production-a31e.up.railway.app/dashboard-api/articles/11
   ```
 
   _Response (200)_
 
   ```json
   {
-    "status": true,
+    "status": "success",
     "code": 200,
-    "message": "Success delete todo id: 23"
-  }
-  ```
-
-  _Response (404 - Data not found)_
-
-  ```json
-  {
-    "status": "error",
-    "code": 404,
-    "message": "Data not found"
-  }
-  ```
-
-  ***
-
-- `DELETE /todos`
-
-  REST API to delete all todo
-
-  > Delete all Todo
-
-  _Request Header_
-
-  | Key           |        Value        |       Location |
-  | :------------ | :-----------------: | -------------: |
-  | Authorization | Bearer <your_token> | Request header |
-
-  _Path Example_
-
-  ```
-  DELETE https://tan-determined-pangolin.cyclic.app/todos
-  ```
-
-  _Response (200)_
-
-  ```json
-  {
-    "status": true,
-    "code": 200,
-    "message": "Success delete all todo"
+    "message": "Success delete article"
   }
   ```
 
@@ -1384,4 +1218,150 @@
   }
   ```
 
+---
+
+- `GET /dashboard-api/user	`
+
+  REST API Get User detail
+
+  > Get User detail
+
+  _Request Header_
+
+  | Key           |        Value        |       Location |
+  | :------------ | :-----------------: | -------------: |
+  | Authorization | Bearer <your_token> | Request header |
+
+  _Path Example_
+
+  ```
+  GET https://back-end-production-a31e.up.railway.app/dashboard-api/user
+  ```
+
+  _Response (200)_
+
+  ```json
+  {
+    "status": "success",
+    "code": 200,
+    "message": "Success get user detail",
+    "user": {
+      "id": 1,
+      "name": "dr. Luis Schroeder",
+      "image": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1152.jpg",
+      "email": "Alden.Funk@yahoo.com",
+      "rating": 5,
+      "hospital": "Fort Collins Hospital",
+      "biography": "biography 1",
+      "specialist": {
+        "name": "Psychiatrist"
+      }
+    }
+  }
+  ```
+
+  _Response (500 - Internal server error)_
+
+  ```json
+  {
+    "status": "error",
+    "code": 500,
+    "message": "Something went wrong"
+  }
+  ```
+
   ***
+
+- `PUT /api/user	`
+
+  REST API Update User
+
+  > Update User
+
+  _Request Header_
+
+  | Key           |        Value        |       Location |
+  | :------------ | :-----------------: | -------------: |
+  | Authorization | Bearer <your_token> | Request header |
+
+  _Request Body_
+
+  ```json
+  {
+    "name": "Your New Name",
+    "hospital": "Your new hospital",
+    "biography": "Your new biography"
+  }
+  ```
+
+  _Path Example_
+
+  ```
+  PUT https://back-end-production-a31e.up.railway.app/dashboard-api/user
+  ```
+
+  _Response (200)_
+
+  ```json
+  {
+    "status": "success",
+    "code": 200,
+    "message": "Success update user"
+  }
+  ```
+
+  _Response (500 - Internal server error)_
+
+  ```json
+  {
+    "status": "error",
+    "code": 500,
+    "message": "Something went wrong"
+  }
+  ```
+
+  ***
+
+- `PUT /dashboard-api/user/upload	`
+
+  REST API Update User photo
+
+  > Update User photo
+
+  _Request Header_
+
+  | Key           |        Value        |       Location |
+  | :------------ | :-----------------: | -------------: |
+  | Authorization | Bearer <your_token> | Request header |
+
+  _Request Body_
+
+  | Key   |     Value      |     Location |
+  | :---- | :------------: | -----------: |
+  | image | <<image_file>> | Request body |
+
+  _Path Example_
+
+  ```
+  PUT https://back-end-production-a31e.up.railway.app/dashboard-api/user/upload
+  ```
+
+  _Response (200)_
+
+  ```json
+  {
+    "status": "success",
+    "code": 201,
+    "message": "Success update user photo"
+  }
+  ```
+
+  _Response (500 - Internal server error)_
+
+  ```json
+  {
+    "status": "error",
+    "code": 500,
+    "message": "Something went wrong"
+  }
+  ```
