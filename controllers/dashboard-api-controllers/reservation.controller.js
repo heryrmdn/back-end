@@ -6,6 +6,7 @@ exports.getReservationList = async (req, res, next) => {
   const doctorId = req.doctor.doctorId;
 
   const reservations = await Reservation.findAll({
+    order: [["date", "DESC"]],
     attributes: ["id", "date", "status"],
     include: {
       model: Customer,
